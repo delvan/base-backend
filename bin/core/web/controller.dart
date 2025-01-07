@@ -18,10 +18,10 @@ abstract class Controller {
     middlewares ??= [];
 
     if (isSecurity) {
-      var _securityService = DependencyInjector().get<SecurityService>();
+      var securityService = DependencyInjector().get<SecurityService>();
       middlewares.addAll([
-        _securityService.authorization,
-        _securityService.verifyJwt,
+        securityService.authorization,
+        securityService.verifyJwt,
       ]);
     }
     var pipe = Pipeline();

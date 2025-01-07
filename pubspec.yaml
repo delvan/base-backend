@@ -19,3 +19,6 @@ dev_dependencies:
 
   commons_core:
    path: ./packages/commons-core
+  
+assets:
+  - .env
