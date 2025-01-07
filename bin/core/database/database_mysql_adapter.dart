@@ -8,11 +8,11 @@ class DatabaseMySqlAdapter implements Database {
   @override
   Future<MySqlConnection> get getConnection async =>
       await MySqlConnection.connect(ConnectionSettings(
-        host: 'localhost',
-        port: 3306,
-        user: 'root',
-        db: 'delivery',
-        password: 'root',
+        host: await CustonEnv.get<String>(key: 'host'),
+        port: await CustonEnv.get<int>(key: 'port'),
+        user: await CustonEnv.get<String>(key: 'user'),
+        db: await CustonEnv.get<String>(key: 'db'),
+        password: await CustonEnv.get<String>(key: 'password'),
       ));
 
   @override
