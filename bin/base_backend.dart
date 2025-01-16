@@ -1,6 +1,6 @@
 import 'package:commons_core/commons_core.dart';
 import 'package:shelf/shelf.dart';
-import 'package:shelf/shelf_io.dart';
+import 'package:shelf/shelf_io.dart' as shelf_io;
 
 import 'application/web/user_controller.dart';
 import 'core/database/database.dart';
@@ -13,35 +13,23 @@ import 'infrastructure/database/user_repository_imp.dart';
 import 'infrastructure/mappers/user_mapper.dart';
 
 void main(List<String> args) async {
-  /*await DatabaseMySqlAdapter()
-      .query("insert into tb_permissoes(nome, status) values ('ADMIN', 'A')");
-  */
-
   print(await DatabaseMySqlAdapter().query('select * from tb_permissoes'));
 
-/*
-  await serve(
-    (Request req) => Response(
-      200,
-      body: 'Ola mundo',
-      headers: {'content-type': 'application/json'},
-    ),
-    'localhost',
-    8080,
-  );
-
- */
-
   final Mapper _userMapper = UserMapper();
-
   final Database _database = DatabaseMySqlAdapter();
-
   final UserRepository _userRepository =
       UserRepositoryImp(_database, _userMapper);
-
   final UserService _userService = UserServiceImp(_userRepository);
-
   final UserController _userController = UserController(_userService);
 
-  _userController.getUsers();
+  var cascateHandler = Cascade().add((_userController.getHandler())).handler;
+
+  var handler =
+      Pipeline().addMiddleware(logRequests()).addHandler(cascateHandler);
+
+  shelf_io.serve(
+    handler,
+    await CustonEnv.get<String>(key: 'server_ip'),
+    await CustonEnv.get<int>(key: 'server_port'),
+  );
 }
