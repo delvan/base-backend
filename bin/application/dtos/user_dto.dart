@@ -1,6 +1,24 @@
 import '../../domain/models/user.dart';
 
-class UserDto {
+class UserDto extends User {
+  final int id;
+  final String password;
+  final String deviceToken;
+
+  UserDto(
+    super.nome,
+    super.sobreNome,
+    super.dtNasc,
+    super.documento,
+    super.email,
+    super.cidade,
+    super.status,
+    this.password,
+    this.deviceToken, [
+    this.id = 0,
+  ]);
+
+//TODO: refatorar aqui
   static Map toMap(User user) => {
         'nome': user.nome,
         'sobrenome': user.sobreNome,

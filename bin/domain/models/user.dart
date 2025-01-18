@@ -1,5 +1,4 @@
 class User {
-  final int id;
   final String nome;
   final String sobreNome;
   final DateTime dtNasc;
@@ -8,19 +7,18 @@ class User {
   final String cidade;
   final String status;
 
-  User({
-    required this.id,
-    required this.nome,
-    required this.sobreNome,
-    required this.dtNasc,
-    required this.documento,
-    required this.email,
-    required this.cidade,
-    required this.status,
-  });
+  User(
+    this.nome,
+    this.sobreNome,
+    this.dtNasc,
+    this.documento,
+    this.email,
+    this.cidade,
+    this.status,
+  );
 
   @override
   String toString() {
-    return 'User(id: $id, nome: $nome, sobreNome: $sobreNome, dtNasc: $dtNasc, documento: $documento, email: $email, cidade: $cidade, status: $status)';
+    return 'User(nome: $nome, sobreNome: $sobreNome, dtNasc: $dtNasc, documento: $documento, email: $email, cidade: $cidade, status: $status)';
   }
 }

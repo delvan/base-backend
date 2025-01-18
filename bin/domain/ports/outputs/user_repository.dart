@@ -3,9 +3,9 @@ import '../../models/user.dart';
 abstract class UserRepository {
   Future<List<User>> getUsers();
 
-  saveUser(User user);
+  Future<bool> saveUser(User user);
 
-  getUserById(int id);
+  User getUserById(int id);
 
-  getUserByEmail(String email);
+  User getUserByEmail(String email);
 }

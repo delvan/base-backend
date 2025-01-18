@@ -9,7 +9,11 @@ class UserServiceImp implements UserService {
 
   @override
   Future<List<User>> getAllUsers() {
-    // TODO: implement getAllUsers
     return _userRepository.getUsers();
+  }
+
+  @override
+  Future<bool> save(User user) {
+    return _userRepository.saveUser(user);
   }
 }
