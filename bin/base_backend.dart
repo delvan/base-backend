@@ -2,13 +2,10 @@ import 'package:commons_core/commons_core.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
 
-import 'application/dtos/user_dto.dart';
-
 import 'application/web/user_controller.dart';
 import 'core/database/database.dart';
 import 'core/database/database_mysql_adapter.dart';
 import 'core/database/mapper.dart';
-import 'domain/models/user.dart';
 import 'domain/ports/inputs/user_service.dart';
 import 'domain/ports/outputs/user_repository.dart';
 import 'domain/services/user_service_imp.dart';
@@ -24,20 +21,6 @@ void main(List<String> args) async {
       UserRepositoryImp(_database, _userMapper);
   final UserService _userService = UserServiceImp(_userRepository);
   final UserController _userController = UserController(_userService);
-
-  _userService
-      .save(UserDto(
-        'Fulano4',
-        'testando4',
-        DateTime.utc(2024, 1, 16),
-        '546461217',
-        'email4@gmail.com',
-        'Caxias',
-        'A',
-        'passwor123',
-        'token',
-      ))
-      .then((value) => print(value));
 
   var cascateHandler = Cascade().add((_userController.getHandler())).handler;
 

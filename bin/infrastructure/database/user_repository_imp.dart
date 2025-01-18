@@ -61,7 +61,7 @@ class UserRepositoryImp implements UserRepository {
     var result = await _database.query(_sql, [
       user.nome,
       user.sobreNome,
-      user.dtNasc,
+      user.dtNasc.toUtc(),
       user.documento,
       user.email,
       user.password,

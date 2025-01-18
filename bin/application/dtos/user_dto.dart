@@ -25,4 +25,16 @@ class UserDto extends User {
         'nomeCompleto': "${user.nome} ${user.sobreNome}",
         'dtNac': user.dtNasc.toIso8601String(),
       };
+
+  static UserDto fromRequest(Map map) => UserDto(
+        map['nome'],
+        map['sobrenome'],
+        DateTime.parse(map['dtNasc']),
+        map['documento'],
+        map['email'],
+        map['cidade'],
+        map['status'],
+        map['password'],
+        map['deviceToken'],
+      );
 }
