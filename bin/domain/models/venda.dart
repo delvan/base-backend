@@ -3,14 +3,19 @@ import 'user.dart';
 
 class Venda {
   final String status;
-  final DateTime dtVernda;
+  final DateTime dtVenda;
   final User user;
   final Produto produto;
 
   Venda(
     this.status,
-    this.dtVernda,
+    this.dtVenda,
     this.user,
     this.produto,
   );
+
+  @override
+  String toString() {
+    return 'Venda(status: $status, dtVernda: $dtVenda, user: $user, produto: $produto)';
+  }
 }
